@@ -1,0 +1,61 @@
+
+# Prompts user to input prices of items
+print("Please input the price of your shopping cart items:")
+price1 = float(input("Item 1: $"))
+price2 = float(input("Item 2: $"))
+price3 = float(input("Item 3: $"))
+total = float(price1) + float(price2) + float(price3)
+
+# If any price is less than 0, the incorrect price was inputted
+if float(price1) < 0 or float(price2) < 0 or float(price3) < 0:
+    print("You have entered a negative price")
+    print("Please double check the prices and rerun the program.")
+    exit()
+
+# If the final cart total is 0, nothing was purchased
+if float(total) == 0:
+    print("You have not purchased anything.")
+    print("If you wish to make a purchase please rerun the program.")
+    exit()
+
+# If cart total is less than $50
+if 0 < float(total) < 50:
+    deliveryCost = 10
+    print("Your cart is less than $50.00")
+    print("The delivery charge is $%.2f " %deliveryCost)
+
+# If cart total is less than $150 but more than $50
+if 50 <= float(total) < 150:
+    deliveryCost = 5
+    print("Your cart is less than $150.00")
+    print("Therefore the delivery charge is $%.2f" %deliveryCost)
+
+# If cart total is $150 or more
+if float(total) >= 150:
+    deliveryCost = 1
+    print("Your cart is more than $150.00")
+    print("Therefore the delivery charge is $1.00")
+
+# Calculates cart total after discount is applied
+totalFinal = float(total) + float(deliveryCost)
+totalDiscount = float(total)*0.8
+
+# Prints final cart summary
+print("\n")
+print("Summary")
+print("The initial cost of your shopping cart is $%.2f" %total)
+print("The delivery cost is $%.2f" %deliveryCost)
+print("Your total cost is $%.2f" %totalFinal)
+print("Sign up for a credit card and get 20% off now!")
+print("Your new total would be $%.2f " % totalDiscount)
+
+# Prints list of purchase prices
+print("\n")
+print("Itemized list of purchase")
+print("Item 1: $%.2f" %price1)
+print("Item 2: $%.2f" %price2)
+print("Item 3: $%.2f" %price3)
+print("Finish")
+
+
+
