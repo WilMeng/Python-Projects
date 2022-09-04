@@ -1,0 +1,69 @@
+# Game description and rules.
+print("Welcome to Text-Based Wordle and play this game with a friend!")
+print("First, input any 5 letter secret word, which the other player shall guess.")
+print("A + appears if the guess has the same letter that is in the same position as the secret word.")
+print("A - appears if the guess contains a letter that is in the secret word but is not in the same position.")
+print("A x appears if the letter in the guess is not in the secret word.")
+
+# Prompts user to input secret word.
+secretWord = input("Please input a secret 5 letter word: ")
+
+# If inputted secret word is too long or too short, program won't run.
+if len(secretWord) < 5:
+    print("Inputted word is too short. Please try again.")
+    exit()
+
+if len(secretWord) > 5:
+    print("Inputted word is too long. Please try again.")
+    exit()
+
+# Declare Variables
+userGuess = ""
+guessRemaining = ""
+guessCount = 0
+guessLimit = 5
+outofGuesses = False
+
+# If guess is not correct and is not out of guesses.
+while userGuess != secretWord and not outofGuesses:
+    if guessCount < guessLimit:
+
+        # Guess counter, and prompts player to guess.
+        guessRemaining = 5 - guessCount
+        print("You have " + str(guessRemaining) + " guesses remaining")
+        userGuess = input("Please guess a word: ")
+        guessCount += 1
+
+        # Tells player guess is too short or too long if guess is not 5 letters.
+        if len(userGuess) < 5:
+            print("Inputted word is too short. Please guess again.")
+
+        if len(userGuess) > 5:
+            print("Inputted word is too long. Please guess again.")
+
+        # Return clues after player guesses
+        if len(userGuess) == 5:
+            position = 0
+            clue = ""
+            for letter in userGuess:
+                if letter == secretWord[position]:
+                    clue += "+"
+                elif letter in secretWord:
+                    clue += "-"
+                else:
+                    clue += "x"
+                position += 1
+            print(clue)
+
+    # Otherwise, if over 5 guess the player is out of guesses
+    else:
+        outofGuesses = True
+
+# If out of guesses, player loses.
+if outofGuesses:
+        print("You lose! You have exceeded the maximum number of attempts.")
+
+# If not out of guesses and the guess is correct, player wins.
+else:
+    print("You win! The word was " + secretWord + ".")
+    print("You guessed it in " + str(guessCount) + " times.")
